@@ -1,0 +1,9 @@
+collected/
+*.log
+cowrie.json*
+.env
+*.key
+crowdsec_api_key.txt
+.DS_Store
+*.swp
+*~
