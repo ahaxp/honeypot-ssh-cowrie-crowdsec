@@ -6,7 +6,7 @@ services:
     ports:
       - "2222:2222"
     volumes:
-      - cowrie-logs:/cowrie/cowrie-git/var/log/cowrie
+      - ./cowrie/log:/cowrie/cowrie-git/var/log/cowrie
       - ./cowrie/cowrie.cfg:/cowrie/cowrie-git/etc/cowrie.cfg
     networks:
       - honeytrapnet
@@ -14,7 +14,3 @@ services:
 networks:
   honeytrapnet:
     driver: bridge
-
-volumes:
-  cowrie-logs:
-    driver: local
