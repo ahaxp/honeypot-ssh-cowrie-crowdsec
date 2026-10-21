@@ -9,11 +9,12 @@ services:
       - cowrie-logs:/cowrie/cowrie-git/var/log/cowrie
       - ./cowrie/cowrie.cfg:/cowrie/cowrie-git/etc/cowrie.cfg
     networks:
-      - honeytrap
+      - honeytrapnet
 
 networks:
-  honeytrap:
-    driver: brigde
+  honeytrapnet:
+    driver: bridge
 
 volumes:
-  cowrie-logs
+  cowrie-logs:
+    driver: local
