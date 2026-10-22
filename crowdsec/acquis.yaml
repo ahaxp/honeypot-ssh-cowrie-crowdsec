@@ -1,0 +1,4 @@
+filenames:
+  - /var/log/cowrie/cowrie.json
+labels:
+  type: cowrie
