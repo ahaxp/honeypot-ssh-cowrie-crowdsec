@@ -18,3 +18,7 @@ Thumbs.db
 *.swp
 collected/*
 !collected/.gitkeep
+crowdsec/config/
+crowdsec/parsers/
+crowdsec/scenarios/
+crowdsec/postoverflows/
