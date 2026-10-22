@@ -10,6 +10,22 @@ services:
       - ./cowrie/cowrie.cfg:/cowrie/cowrie-git/etc/cowrie.cfg
     networks:
       - honeytrapnet
+  
+  crowdsec:
+    image: crowdsecurity/crowdsec:latest
+    container_name: crowdsec
+    restart: unless-stopped
+    environment:
+      COLLECTIONS: "crowdsecurity/linux crowdsecurity/sshd"
+      GID: "1000"
+    volumes:
+      - ./crowdsec/config:/etc/crowdsec
+      - ./crowdsec/data:/var/lib/crowdsec/data
+      - ./cowrie/log:/var/log/cowrie:ro
+    ports:
+      - "127.0.0.1:8080:8080"
+    networks:
+      - honeytrapnet
 
 networks:
   honeytrapnet:
