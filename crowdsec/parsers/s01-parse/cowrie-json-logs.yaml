@@ -1,0 +1,32 @@
+onsuccess: next_stage
+name: local/cowrie-json-logs
+description: "Parser for Cowrie honeypot JSON logs (cowrie.json file)"
+filter: >-
+  evt.Line.Labels.type == 'cowrie' &&
+  evt.Line.Raw startsWith '{' &&
+  UnmarshalJSON(evt.Line.Raw, evt.Unmarshaled, 'cowrie') in ['', nil] &&
+  (evt.Unmarshaled.cowrie.eventid ?? '') startsWith 'cowrie.' &&
+  (evt.Unmarshaled.cowrie.src_ip ?? '') != ''
+statics:
+  - target: evt.StrTime
+    expression: evt.Unmarshaled.cowrie.timestamp
+  - target: evt>StrTimeFormat
+    value: "2006-01-02T15:04:05Z0700"
+  - meta: soruce_ip
+    expression: evt.Unmarshaled.cowrie.src_ip
+  - meta: dest_ip
+    expression: evt.Unmarshaled.cowrie.dst_ip
+  - meta: dest_port
+    expression: "evt.Unmarshaled.cowrie.dst_port != nil ? string(int(evt.Unmarshaled.cowrie.dst_port)) : nil"
+  - meta: target_user
+    expression: evt.Unmarshaled.cowrie.username
+  - meta: service
+    expression: "evt.Unmarshaled.cowrie.protocol in ['ssh', 'telnet'] ? evt.Unmarshaled.cowrie.protocol : 'cowrie'"
+  - meta: log_type
+    expression: |
+      let eventid = evt.Unmarshaled.cowrie.eventid;
+      let protocol = evt.Unmarshaled.cowrie.protocol ?? '';
+      eventid == 'cowrie.session.connect' && protocol == 'telnet' ? 'telnet_new_session' :
+      eventid == 'cowrie.login.failed' && protocol == 'ssh' ? 'ssh_failed-auth' :
+      eventid == 'cowrie.session.file_download' && (evt.Unmarshaled.cowrie.url ?? '') == '' ? 'cowrie_session_file_redirect' :
+      'cowrie_' + replace(trimPrefix(eventid, 'cowrie.'), '.', '_')
