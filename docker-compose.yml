@@ -21,6 +21,9 @@ services:
     volumes:
       - ./crowdsec/config:/etc/crowdsec
       - ./crowdsec/data:/var/lib/crowdsec/data
+      - ./crowdsec/acquis.yaml:/etc/crowdsec/acquis.yaml
+      - ./crowdsec/parsers:/etc/crowdsec/parsers
+      - ./crowdsec/scenarios:/etc/crowdsec/scenarios
       - ./cowrie/log:/var/log/cowrie:ro
     ports:
       - "127.0.0.1:8080:8080"
