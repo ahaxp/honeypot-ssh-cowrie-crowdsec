@@ -10,9 +10,9 @@ filter: >-
 statics:
   - target: evt.StrTime
     expression: evt.Unmarshaled.cowrie.timestamp
-  - target: evt>StrTimeFormat
+  - target: evt.StrTimeFormat
     value: "2006-01-02T15:04:05Z0700"
-  - meta: soruce_ip
+  - meta: source_ip
     expression: evt.Unmarshaled.cowrie.src_ip
   - meta: dest_ip
     expression: evt.Unmarshaled.cowrie.dst_ip
