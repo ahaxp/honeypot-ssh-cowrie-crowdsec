@@ -39,7 +39,7 @@ services:
       - honeytrapnet
 
   bouncer:
-    image: crowdsecurity/cs-firewall-bouncer:latest
+    image: ghcr.io/shgew/cs-firewall-bouncer-docker:stable
     container_name: bouncer
     restart: unless-stopped
     network_mode: host
@@ -47,9 +47,10 @@ services:
       - NET_ADMIN
       - NET_RAW
     environment:
-      - CROWDSEC_BOUNCER_API_KEY=${CROWDSEC_BOUNCER_API_KEY}
-      - CROWDSEC_AGENT_HOST=127.0.0.1:8080
-      - FIREWALL_BOUNCER_DENY_ACTION=DROP
+      - API_URL=http://127.0.0.1:8080/
+      - API_KEY=${CROWDSEC_BOUNCER_API_KEY}
+    volumes:
+      - ./crowdsec-firewall-bouncer.yaml:/config/crowdsec-firewall-bouncer.yaml:ro
 
 networks:
   honeytrapnet:
