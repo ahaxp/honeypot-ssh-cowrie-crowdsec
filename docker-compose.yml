@@ -8,6 +8,7 @@ services:
     volumes:
       - ./cowrie/log:/cowrie/cowrie-git/var/log/cowrie
       - ./cowrie/cowrie.cfg:/cowrie/cowrie-git/etc/cowrie.cfg
+      - ./cowrie/userdb.txt:/cowrie/cowrie-git/etc/userdb.txt
     networks:
       - honeytrapnet
   
