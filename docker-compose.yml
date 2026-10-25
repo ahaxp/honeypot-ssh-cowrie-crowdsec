@@ -38,6 +38,19 @@ services:
     networks:
       - honeytrapnet
 
+  bouncer:
+    image: crowdsecurity/cs-firewall-bouncer:latest
+    container_name: bouncer
+    restart: unless-stopped
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    environment:
+      - CROWDSEC_BOUNCER_API_KEY=${CROWDSEC_BOUNCER_API_KEY}
+      - CROWDSEC_AGENT_HOST=127.0.0.1:8080
+      - FIREWALL_BOUNCER_DENY_ACTION=DROP
+
 networks:
   honeytrapnet:
     driver: bridge
