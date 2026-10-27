@@ -16,7 +16,7 @@ __pycache__/
 .DS_Store
 Thumbs.db
 *.swp
-collected/*
+collected/
 !collected/.gitkeep
 crowdsec/config/
 crowdsec/parsers/
