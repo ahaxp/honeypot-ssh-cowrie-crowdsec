@@ -15,3 +15,11 @@ wait_for_file() {
     done
     echo "Plik $name został znaleziony."
 }
+
+cowrie_ready() {
+    timeout 3 bash -c 'exec 3<>/dev/tcp/127.0.0.1/2222 && head -c 3 <&3' 2>/dev/null | grep -q '^SSH'
+}
+
+lapi_ready() {
+    curl -sf http://localhost:8081/health;
+}
