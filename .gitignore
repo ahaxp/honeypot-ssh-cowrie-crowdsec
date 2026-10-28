@@ -22,3 +22,4 @@ crowdsec/config/
 crowdsec/parsers/
 crowdsec/scenarios/
 crowdsec/postoverflows/
+site/
