@@ -52,6 +52,17 @@ services:
     volumes:
       - ./crowdsec-firewall-bouncer.yaml:/config/crowdsec-firewall-bouncer.yaml:ro
 
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8080:80"
+    volumes:
+      - ./site:/usr/share/nginx/html:ro
+    networks:
+      - honeytrapnet
+
 networks:
   honeytrapnet:
     driver: bridge
