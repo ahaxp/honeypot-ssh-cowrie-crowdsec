@@ -30,4 +30,4 @@ docker compose up -d --build || { echo "Błąd podczas uruchamiania kontenerów 
 wait_for_file "Cowrie SSH" cowrie_ready || { echo "Cowrie SSH nie jest gotowy"; exit 1; }
 wait_for_file "LAPI" lapi_ready || { echo "LAPI nie jest gotowy"; exit 1; }
 
-echo "Środowisko gotowe. Dashboard: http://localhost:8080"
+echo "Środowisko gotowe. Dashboard: http://localhost:8081"
