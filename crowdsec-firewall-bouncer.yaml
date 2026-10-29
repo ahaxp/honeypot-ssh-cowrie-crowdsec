@@ -1,6 +1,6 @@
 mode: iptables
-api_url: http://127.0.0.1:8080/
-api_key: ${CROWDSEC_BOUNCER_API_KEY}
+api_url: http://127.0.0.1:8081/
+api_key: ${API_KEY}
 deny_action: DROP
 log_level: info
 
