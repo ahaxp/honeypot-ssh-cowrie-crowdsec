@@ -80,7 +80,8 @@ honeypot-ssh-cowrie-crowdsec/
 ├── docs/
 │   ├── .gitkeep
 │   ├── architecture.md
-│   ├── structure.md
+│   ├── commands.md
+    ├── structure.md
 │   └── raport.md
 │
 └── collected/                       # dane runtime, ignorowane przez Git
